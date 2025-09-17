@@ -1,39 +1,20 @@
-'btn = ""
-'color = "GREEN"
-'regim = "NORMAL"
-'LCD.Clear()
-'While btn <> "ER"
-''MotorA.StartSpeed(speed)
-'If btn = "U" Then
-'color = "GREEN"
-'ElseIf btn = "E" Then
-'color = "RED"
-'ElseIf btn = "D" Then
-'color = "ORANGE"
-'ElseIf btn = "L" Then
-'regim = "NORMAL"
-'ElseIf btn = "R" Then
-'regim = "FLASH"
-'EndIf
-'EV3.SetLEDColor("NONE", "")
-'Program.Delay(500)
-'EV3.SetLEDColor(color, regim)
-'Buttons.Wait()
-'btn = Buttons.GetClicks()
-'EndWhile
+' Проверка работы с модулем таблицы рекордов.
+import "Save"                                 ' Подключаем сам модуль таблицы рекордов
+import "LCDRu"                                ' подключаем модуль руссификации
+' Считываем таблицу рекордов
+Save.ReadTableRec("TetrisRecords")            ' Считываем текущую таблицу рекордов
+' Гасим светодиоды, а то отвлекают
+EV3.SetLEDColor("OFF", "NORMAL")
+while btn <> "L"                              ' До тех пор пока не нажата кнопка влево ("L") - циклически входим в таблицу для задания текущего игрока
+  Save.PrintTableRec(1)                                      ' Распечатываем текущую таблицу рекордов с возможностью выбора игрока
+  LCD.Clear() 
+  LCDRu.TextRu(1, 0, 0, 2, Save.TekNum + ")")                 'Номер строки таблицы рекордов с текущим игроком
+  LCDRu.TextRu(1, 0, 20, 2, Save.TekName)                     'Имя текущего игрока
+  LCDRu.TextRu(1, 0, 40, 2, Save.TekDate)                     'дата текущего рекорда
+  LCDRu.TextRu(1, 0, 60, 2, "CXTN=" + Save.TekCount)          'значение рекорда текущего игрока 
+  LCDRu.TextRu(1, 0, 60, 2, "EHJDTYM=" + Save.TekUroven)      'достигнутый в рекорде уровень игры
+  LCDRu.TextRu(1, 0, 60, 2, "GFHJKM=" + Save.TekParol)        'пароль текущего игрока
+  Buttons.Wait()                                              'отображаем параметы текущего выбранного в таблице игрока
+  btn = Buttons.GetClicks()                                   'пока не нажмем на любую кнопку
+EndWhile
 
-'-------------------------------------------
-'import "Save"
-'' Считываем таблицу рекордов
-'Save.ReadTableRec("TetrisRecords")            ' Считываем текущую таблицу рекордов
-'' Гасим светодиоды, а то отвлекают
-'EV3.SetLEDColor("OFF", "NORMAL")
-'while btn <> "L"
-'Save.PrintTableRec(1)      ' Распечатываем текущую таблицу рекордов с возможностью выбора игрока
-'Buttons.Wait()
-'btn = Buttons.GetClicks()
-'EndWhile
-import "LCDRu"
-  LCD.Clear()                   
-  Buttons.Wait()
-  Buttons.Flush()
