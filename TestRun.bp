@@ -1,0 +1,39 @@
+'btn = ""
+'color = "GREEN"
+'regim = "NORMAL"
+'LCD.Clear()
+'While btn <> "ER"
+''MotorA.StartSpeed(speed)
+'If btn = "U" Then
+'color = "GREEN"
+'ElseIf btn = "E" Then
+'color = "RED"
+'ElseIf btn = "D" Then
+'color = "ORANGE"
+'ElseIf btn = "L" Then
+'regim = "NORMAL"
+'ElseIf btn = "R" Then
+'regim = "FLASH"
+'EndIf
+'EV3.SetLEDColor("NONE", "")
+'Program.Delay(500)
+'EV3.SetLEDColor(color, regim)
+'Buttons.Wait()
+'btn = Buttons.GetClicks()
+'EndWhile
+
+'-------------------------------------------
+'import "Save"
+'' Считываем таблицу рекордов
+'Save.ReadTableRec("TetrisRecords")            ' Считываем текущую таблицу рекордов
+'' Гасим светодиоды, а то отвлекают
+'EV3.SetLEDColor("OFF", "NORMAL")
+'while btn <> "L"
+'Save.PrintTableRec(1)      ' Распечатываем текущую таблицу рекордов с возможностью выбора игрока
+'Buttons.Wait()
+'btn = Buttons.GetClicks()
+'EndWhile
+import "LCDRu"
+  LCD.Clear()                   
+  Buttons.Wait()
+  Buttons.Flush()
